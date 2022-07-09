@@ -10,12 +10,14 @@ arrowBack = wrapper.querySelector("header i");
 let api;
 const APIKEY = '56e33c7ccd54977cb11aac3190cca509'
 
+// Checking the input field value and sending value to requestApi function
 inputField.addEventListener("keyup", e =>{
     if(e.key == "Enter" && inputField.value != ""){
         requestApi(inputField.value);
     }
 });
 
+// If user click on get location it will fetch the current location
 locationBtn.addEventListener("click", () =>{
     if(navigator.geolocation){
         navigator.geolocation.getCurrentPosition(onSuccess, onError);
@@ -29,12 +31,14 @@ function requestApi(city){
     fetchData();
 }
 
+// On success in getting location 
 function onSuccess(position){
     const {latitude, longitude} = position.coords;
     api = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${APIKEY}`;
     fetchData();
 }
 
+// On error in getting location
 function onError(error){
     infoTxt.innerText = error.message;
     infoTxt.classList.add("error");
